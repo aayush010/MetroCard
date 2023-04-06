@@ -15,6 +15,9 @@ public class ServiceImpl {
     private List<MetroCard> mcs= new ArrayList<MetroCard>();
     private HashMap<String, Integer> locateIndexInList = new HashMap<>();
     private int index = 0;
+
+    final double DISCOUNT = 0.5 ;
+    final double SERVICE_FEE_CHARGE_PERCENT = 0.02;
     Airport airport = new Airport();
     Central central = new Central();
     private void addMetroCard(MetroCard mc){
@@ -42,10 +45,10 @@ public class ServiceImpl {
         int count = ms.getTravelCount();
         int serviceFee = 0;
         PassengerType passengerType = ms.getPassengerType();
-        int costToTravel = (count%2==0) ? (int)(0.5 * passengerType.getTravelCharge()) : passengerType.getTravelCharge();
+        int costToTravel = (count%2==0) ? (int)(DISCOUNT * passengerType.getTravelCharge()) : passengerType.getTravelCharge();
         int discount = passengerType.getTravelCharge() - costToTravel ;
         if(costToTravel > ms.getBalance()){
-            serviceFee = (int)(0.02*(costToTravel - ms.getBalance()));
+            serviceFee = (int)(SERVICE_FEE_CHARGE_PERCENT*(costToTravel - ms.getBalance()));
             mcs.get(index).setBalance(costToTravel);
         }
         mcs.get(index).setBalance(mcs.get(index).getBalance() - costToTravel);
