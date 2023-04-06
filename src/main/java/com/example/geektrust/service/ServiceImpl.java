@@ -24,14 +24,14 @@ public class ServiceImpl {
     public void processData(String key, PassengerType passengerType, Station station) {
         int indexInList = locateIndexInList.get(key);
         mcs.get(indexInList).setTravelCount(mcs.get(indexInList).getTravelCount() + 1);
-        if(Objects.nonNull(mcs.get(indexInList).getPassengerType()))
+        if(Objects.isNull(mcs.get(indexInList).getPassengerType()))
             mcs.get(indexInList).setPassengerType(passengerType);
-        if(station.equals(Station.AIRPORT)){
+        if(station.equals(Station.AIRPORT) ){
             airport.updatePassengerTotalCount(passengerType, airport.getPassengerTotalCount(passengerType) + 1);
         }
 
         if(station.equals(Station.CENTRAL)){
-            central.updatePassengerTotalCount(passengerType, airport.getPassengerTotalCount(passengerType) + 1);
+            central.updatePassengerTotalCount(passengerType, central.getPassengerTotalCount(passengerType) + 1);
         }
         processExpenditure(indexInList, station);
     }
@@ -44,9 +44,12 @@ public class ServiceImpl {
         int costToTravel = (count%2==0) ? (int)(0.5 * passengerType.getTravelCharge()) : passengerType.getTravelCharge();
         int discount = passengerType.getTravelCharge() - costToTravel ;
         if(costToTravel > ms.getBalance()){
-            serviceFee = (int)(0.2*(costToTravel - ms.getBalance()));
+            serviceFee = (int)(0.02*(costToTravel - ms.getBalance()));
+            mcs.get(index).setBalance(costToTravel);
         }
+        mcs.get(index).setBalance(mcs.get(index).getBalance() - costToTravel);
         costToTravel += serviceFee;
+        //System.out.println("Cost to travel :" +costToTravel);
         if(station.equals(Station.AIRPORT)){
             airport.setTotalCollection(airport.getTotalCollection() + costToTravel);
             airport.setTotalDiscount(airport.getTotalDiscount() + discount);

@@ -20,16 +20,16 @@ public class Main {
             ServiceImpl service = new ServiceImpl();
             int i = 0;
             while (sc.hasNext()) {
-                if(sc.next(Pattern.compile("BALANCE")).equals("BALANCE")){
+                String input = sc.next(Pattern.compile("[A-Z_]*"));
+                if(input.equals("BALANCE")){
                     MetroCard mc = new MetroCard();
                     mc.setId(sc.next(Pattern.compile("MC.")));
                     mc.setBalance(sc.nextInt());
                     service.addMetroCard(mc);
 
-                }else if(sc.next(Pattern.compile("CHECK_IN")).equals("CHECK_IN")){
+                }else if(input.equals("CHECK_IN")){
                     String key = sc.next(Pattern.compile("MC."));
-                    String pattern = [A-Z];
-                    PassengerType passengerType = PassengerType.valueOf(sc.next(Pattern.compile("")));
+                    PassengerType passengerType = PassengerType.valueOf(sc.next(Pattern.compile("[A-Z_]*")));
                     Station station = Station.valueOf(sc.next());
                     service.processData(key, passengerType, station);
                 }else{
