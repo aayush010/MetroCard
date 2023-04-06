@@ -4,17 +4,16 @@ import com.example.geektrust.Enum.PassengerType;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 @Getter
 @Setter
-public class Summary {
-    public LinkedHashMap<PassengerType, Integer> passengerTypeSummary = new LinkedHashMap<>();
-    public Integer totalCollection;
-    public Integer totalDiscount;
+public class StationSummary {
+    private LinkedHashMap<PassengerType, Integer> passengerTypeSummary = new LinkedHashMap<>();
+    private Integer totalCollection;
+    private Integer totalDiscount;
 
-    public Summary() {
+    public StationSummary() {
         this.passengerTypeSummary.put(PassengerType.ADULT,0);
         this.passengerTypeSummary.put(PassengerType.KID,0);
         this.passengerTypeSummary.put(PassengerType.SENIOR_CITIZEN,0);

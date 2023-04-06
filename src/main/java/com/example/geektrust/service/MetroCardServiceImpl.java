@@ -2,25 +2,25 @@ package com.example.geektrust.service;
 
 import com.example.geektrust.Enum.PassengerType;
 import com.example.geektrust.domain.MetroCard;
-import com.example.geektrust.domain.Summary;
+import com.example.geektrust.domain.StationSummary;
 
 import java.util.*;
-import java.util.regex.Pattern;
+
 import static com.example.geektrust.Constants.Constants.*;
 
-public class ServiceImpl {
+public class MetroCardServiceImpl {
 
     private List<MetroCard> mcs= new ArrayList<MetroCard>();
     private HashMap<String, Integer> locateIndexInList = new HashMap<>();
     private int index = 0;
-    Summary airport = new Summary();
-    Summary central = new Summary();
-    private void addMetroCard(MetroCard mc){
+    StationSummary airport = new StationSummary();
+    StationSummary central = new StationSummary();
+    public void addMetroCard(MetroCard mc){
         mcs.add(mc);
         locateIndexInList.put(mc.getId(), index++);
     }
 
-    private void processData(String key, PassengerType passengerType, Station station) {
+    public void processData(String key, PassengerType passengerType, Station station) {
         int indexInList = locateIndexInList.get(key);
         mcs.get(indexInList).setTravelCount(mcs.get(indexInList).getTravelCount() + 1);
         if(Objects.isNull(mcs.get(indexInList).getPassengerType()))
@@ -62,40 +62,9 @@ public class ServiceImpl {
         }
     }
 
-    private void printSummary() {
-
-        System.out.println("TOTAL_COLLECTION"+"    "+Station.CENTRAL + "     " + central.getTotalCollection() + "       " + central.getTotalDiscount());
-        System.out.println("PASSENGER_TYPE_SUMMARY");
-        for (Map.Entry<PassengerType,Integer> mapElement : central.getPassengerTypeSummary().entrySet()){
-            if(mapElement.getValue() != 0){
-                System.out.println(mapElement.getKey() + "   " + mapElement.getValue());
-            }
-        }
-
-        System.out.println("TOTAL_COLLECTION"+"    "+Station.AIRPORT + "     " + airport.getTotalCollection() + "       " + airport.getTotalDiscount());
-        System.out.println("PASSENGER_TYPE_SUMMARY");
-        for (Map.Entry<PassengerType,Integer> mapElement : airport.getPassengerTypeSummary().entrySet()){
-            if(mapElement.getValue() != 0){
-                System.out.println(mapElement.getKey() + "   " + mapElement.getValue());
-            }
-        }
-    }
-
-    public void readInput(Scanner sc) {
-        String input = sc.next(Pattern.compile(REGEX1));
-        if(input.equals(BALANCE_CONSTANT)){
-            MetroCard mc = new MetroCard();
-            mc.setId(sc.next(Pattern.compile(REGEX2)));
-            mc.setBalance(sc.nextInt());
-            addMetroCard(mc);
-
-        }else if(input.equals(CHECK_IN_CONSTANT)){
-            String key = sc.next(Pattern.compile(REGEX2));
-            PassengerType passengerType = PassengerType.valueOf(sc.next(Pattern.compile(REGEX1)));
-            Station station = Station.valueOf(sc.next());
-            processData(key, passengerType, station);
-        }else{
-            printSummary();
-        }
+    public void printSummary() {
+        ReadWriteServiceImpl obj = new ReadWriteServiceImpl();
+        obj.writeSummary(central);
+        obj.writeSummary(airport);
     }
 }

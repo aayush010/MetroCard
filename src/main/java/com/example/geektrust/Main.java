@@ -1,6 +1,6 @@
 package com.example.geektrust;
 
-import com.example.geektrust.service.ServiceImpl;
+import com.example.geektrust.service.ReadWriteServiceImpl;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -13,10 +13,9 @@ public class Main {
         try {
             FileInputStream fis = new FileInputStream(args[0]);
             Scanner sc = new Scanner(fis);// file to be scanned
-            ServiceImpl service = new ServiceImpl();
-            int i = 0;
+            ReadWriteServiceImpl readWriteService = new ReadWriteServiceImpl();
             while (sc.hasNext()) {
-                service.readInput(sc);
+                readWriteService.readInput(sc);
             }
             sc.close(); // closes the scanner
         } catch (IOException e) {
