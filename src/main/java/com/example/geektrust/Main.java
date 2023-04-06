@@ -1,14 +1,10 @@
 package com.example.geektrust;
 
-import com.example.geektrust.domain.MetroCard;
-import com.example.geektrust.Enum.PassengerType;
-import com.example.geektrust.Enum.Station;
 import com.example.geektrust.service.ServiceImpl;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Scanner;
-import java.util.regex.Pattern;
 
 public class Main {
 

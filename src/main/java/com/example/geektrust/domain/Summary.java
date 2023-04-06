@@ -10,14 +10,14 @@ import java.util.LinkedHashMap;
 @Getter
 @Setter
 public class Summary {
-    LinkedHashMap<PassengerType, Integer> passengerTypeSummary = new LinkedHashMap<>();
-    Integer totalCollection;
-    Integer totalDiscount;
+    public LinkedHashMap<PassengerType, Integer> passengerTypeSummary = new LinkedHashMap<>();
+    public Integer totalCollection;
+    public Integer totalDiscount;
 
     public Summary() {
         this.passengerTypeSummary.put(PassengerType.ADULT,0);
-        this.passengerTypeSummary.put(PassengerType.SENIOR_CITIZEN,0);
         this.passengerTypeSummary.put(PassengerType.KID,0);
+        this.passengerTypeSummary.put(PassengerType.SENIOR_CITIZEN,0);
         this.totalCollection = 0;
         this.totalDiscount = 0;
     }

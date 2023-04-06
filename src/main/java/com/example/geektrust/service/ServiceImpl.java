@@ -1,25 +1,20 @@
 package com.example.geektrust.service;
 
 import com.example.geektrust.Enum.PassengerType;
-import com.example.geektrust.Enum.Station;
-import com.example.geektrust.domain.Airport;
-import com.example.geektrust.domain.Central;
 import com.example.geektrust.domain.MetroCard;
+import com.example.geektrust.domain.Summary;
 
-import java.sql.SQLOutput;
 import java.util.*;
 import java.util.regex.Pattern;
+import static com.example.geektrust.Constants.Constants.*;
 
 public class ServiceImpl {
 
     private List<MetroCard> mcs= new ArrayList<MetroCard>();
     private HashMap<String, Integer> locateIndexInList = new HashMap<>();
     private int index = 0;
-
-    final double DISCOUNT = 0.5 ;
-    final double SERVICE_FEE_CHARGE_PERCENT = 0.02;
-    Airport airport = new Airport();
-    Central central = new Central();
+    Summary airport = new Summary();
+    Summary central = new Summary();
     private void addMetroCard(MetroCard mc){
         mcs.add(mc);
         locateIndexInList.put(mc.getId(), index++);
@@ -53,7 +48,10 @@ public class ServiceImpl {
         }
         mcs.get(index).setBalance(mcs.get(index).getBalance() - costToTravel);
         costToTravel += serviceFee;
-        //System.out.println("Cost to travel :" +costToTravel);
+        updateSummaryAtStation(costToTravel, discount, station);
+    }
+
+    private void updateSummaryAtStation(int costToTravel, int discount, Station station) {
         if(station.equals(Station.AIRPORT)){
             airport.setTotalCollection(airport.getTotalCollection() + costToTravel);
             airport.setTotalDiscount(airport.getTotalDiscount() + discount);
@@ -84,16 +82,16 @@ public class ServiceImpl {
     }
 
     public void readInput(Scanner sc) {
-        String input = sc.next(Pattern.compile("[A-Z_]*"));
-        if(input.equals("BALANCE")){
+        String input = sc.next(Pattern.compile(REGEX1));
+        if(input.equals(BALANCE_CONSTANT)){
             MetroCard mc = new MetroCard();
-            mc.setId(sc.next(Pattern.compile("MC.")));
+            mc.setId(sc.next(Pattern.compile(REGEX2)));
             mc.setBalance(sc.nextInt());
             addMetroCard(mc);
 
-        }else if(input.equals("CHECK_IN")){
-            String key = sc.next(Pattern.compile("MC."));
-            PassengerType passengerType = PassengerType.valueOf(sc.next(Pattern.compile("[A-Z_]*")));
+        }else if(input.equals(CHECK_IN_CONSTANT)){
+            String key = sc.next(Pattern.compile(REGEX2));
+            PassengerType passengerType = PassengerType.valueOf(sc.next(Pattern.compile(REGEX1)));
             Station station = Station.valueOf(sc.next());
             processData(key, passengerType, station);
         }else{
