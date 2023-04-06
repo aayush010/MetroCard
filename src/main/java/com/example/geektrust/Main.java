@@ -20,21 +20,7 @@ public class Main {
             ServiceImpl service = new ServiceImpl();
             int i = 0;
             while (sc.hasNext()) {
-                String input = sc.next(Pattern.compile("[A-Z_]*"));
-                if(input.equals("BALANCE")){
-                    MetroCard mc = new MetroCard();
-                    mc.setId(sc.next(Pattern.compile("MC.")));
-                    mc.setBalance(sc.nextInt());
-                    service.addMetroCard(mc);
-
-                }else if(input.equals("CHECK_IN")){
-                    String key = sc.next(Pattern.compile("MC."));
-                    PassengerType passengerType = PassengerType.valueOf(sc.next(Pattern.compile("[A-Z_]*")));
-                    Station station = Station.valueOf(sc.next());
-                    service.processData(key, passengerType, station);
-                }else{
-                    service.printSummary();
-                }
+                service.readInput(sc);
             }
             sc.close(); // closes the scanner
         } catch (IOException e) {

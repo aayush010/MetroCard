@@ -8,20 +8,21 @@ import com.example.geektrust.domain.MetroCard;
 
 import java.sql.SQLOutput;
 import java.util.*;
+import java.util.regex.Pattern;
 
 public class ServiceImpl {
 
-    List<MetroCard> mcs= new ArrayList<MetroCard>();
-    HashMap<String, Integer> locateIndexInList = new HashMap<>();
-    int index = 0;
+    private List<MetroCard> mcs= new ArrayList<MetroCard>();
+    private HashMap<String, Integer> locateIndexInList = new HashMap<>();
+    private int index = 0;
     Airport airport = new Airport();
     Central central = new Central();
-    public void addMetroCard(MetroCard mc){
+    private void addMetroCard(MetroCard mc){
         mcs.add(mc);
         locateIndexInList.put(mc.getId(), index++);
     }
 
-    public void processData(String key, PassengerType passengerType, Station station) {
+    private void processData(String key, PassengerType passengerType, Station station) {
         int indexInList = locateIndexInList.get(key);
         mcs.get(indexInList).setTravelCount(mcs.get(indexInList).getTravelCount() + 1);
         if(Objects.isNull(mcs.get(indexInList).getPassengerType()))
@@ -60,7 +61,7 @@ public class ServiceImpl {
         }
     }
 
-    public void printSummary() {
+    private void printSummary() {
 
         System.out.println("TOTAL_COLLECTION"+"    "+Station.CENTRAL + "     " + central.getTotalCollection() + "       " + central.getTotalDiscount());
         System.out.println("PASSENGER_TYPE_SUMMARY");
@@ -76,6 +77,24 @@ public class ServiceImpl {
             if(mapElement.getValue() != 0){
                 System.out.println(mapElement.getKey() + "   " + mapElement.getValue());
             }
+        }
+    }
+
+    public void readInput(Scanner sc) {
+        String input = sc.next(Pattern.compile("[A-Z_]*"));
+        if(input.equals("BALANCE")){
+            MetroCard mc = new MetroCard();
+            mc.setId(sc.next(Pattern.compile("MC.")));
+            mc.setBalance(sc.nextInt());
+            addMetroCard(mc);
+
+        }else if(input.equals("CHECK_IN")){
+            String key = sc.next(Pattern.compile("MC."));
+            PassengerType passengerType = PassengerType.valueOf(sc.next(Pattern.compile("[A-Z_]*")));
+            Station station = Station.valueOf(sc.next());
+            processData(key, passengerType, station);
+        }else{
+            printSummary();
         }
     }
 }
