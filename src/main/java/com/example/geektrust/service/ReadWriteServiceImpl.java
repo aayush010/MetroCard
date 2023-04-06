@@ -32,9 +32,9 @@ public class ReadWriteServiceImpl {
         }
     }
 
-    public void writeSummary(StationSummary station) {
+    public void writeSummary(StationSummary station, Station central) {
 
-        System.out.println("TOTAL_COLLECTION"+"    "+Station.CENTRAL + "     " + station.getTotalCollection() + "       " + station.getTotalDiscount());
+        System.out.println("TOTAL_COLLECTION"+"    "+ central + "     " + station.getTotalCollection() + "       " + station.getTotalDiscount());
         System.out.println("PASSENGER_TYPE_SUMMARY");
         for (Map.Entry<PassengerType,Integer> mapElement : station.getPassengerTypeSummary().entrySet()){
             if(mapElement.getValue() != 0){

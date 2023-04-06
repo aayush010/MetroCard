@@ -7,6 +7,8 @@ import com.example.geektrust.domain.StationSummary;
 import java.util.*;
 
 import static com.example.geektrust.Constants.Constants.*;
+import static com.example.geektrust.Constants.Constants.Station.AIRPORT;
+import static com.example.geektrust.Constants.Constants.Station.CENTRAL;
 
 public class MetroCardServiceImpl {
 
@@ -29,7 +31,7 @@ public class MetroCardServiceImpl {
             airport.updatePassengerTotalCount(passengerType, airport.getPassengerTotalCount(passengerType) + 1);
         }
 
-        if(station.equals(Station.CENTRAL)){
+        if(station.equals(CENTRAL)){
             central.updatePassengerTotalCount(passengerType, central.getPassengerTotalCount(passengerType) + 1);
         }
         processExpenditure(indexInList, station);
@@ -56,7 +58,7 @@ public class MetroCardServiceImpl {
             airport.setTotalCollection(airport.getTotalCollection() + costToTravel);
             airport.setTotalDiscount(airport.getTotalDiscount() + discount);
         }
-        if(station.equals(Station.CENTRAL)){
+        if(station.equals(CENTRAL)){
             central.setTotalCollection(central.getTotalCollection() + costToTravel);
             central.setTotalDiscount(central.getTotalDiscount() + discount);
         }
@@ -64,7 +66,7 @@ public class MetroCardServiceImpl {
 
     public void printSummary() {
         ReadWriteServiceImpl obj = new ReadWriteServiceImpl();
-        obj.writeSummary(central);
-        obj.writeSummary(airport);
+        obj.writeSummary(central, CENTRAL);
+        obj.writeSummary(airport, AIRPORT);
     }
 }
