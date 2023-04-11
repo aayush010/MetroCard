@@ -1,5 +1,4 @@
 package com.example.geektrust;
 
-public class MainTest {
-
+public class MetroCardTest {
 }

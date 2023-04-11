@@ -12,33 +12,37 @@ import static com.example.geektrust.Constants.Constants.Station.CENTRAL;
 
 public class MetroCardServiceImpl {
 
-    private List<MetroCard> mcs= new ArrayList<MetroCard>();
-    private HashMap<String, Integer> locateIndexInList = new HashMap<>();
+    private List<MetroCard> metroCardList = new ArrayList<MetroCard>();
+    private HashMap<String, Integer> locateMetroCardIndexInList = new HashMap<>();
     private int index = 0;
     StationSummary airport = new StationSummary();
     StationSummary central = new StationSummary();
     public void addMetroCard(MetroCard mc){
-        mcs.add(mc);
-        locateIndexInList.put(mc.getId(), index++);
+        metroCardList.add(mc);
+        locateMetroCardIndexInList.put(mc.getId(), index++);
     }
 
     public void processData(String key, PassengerType passengerType, Station station) {
-        int indexInList = locateIndexInList.get(key);
-        mcs.get(indexInList).setTravelCount(mcs.get(indexInList).getTravelCount() + 1);
-        if(Objects.isNull(mcs.get(indexInList).getPassengerType()))
-            mcs.get(indexInList).setPassengerType(passengerType);
-        if(station.equals(Station.AIRPORT) ){
+        int indexInList = locateMetroCardIndexInList.get(key);
+        metroCardList.get(indexInList).setTravelCount(metroCardList.get(indexInList).getTravelCount() + 1);
+        if(Objects.isNull(metroCardList.get(indexInList).getPassengerType()))
+            metroCardList.get(indexInList).setPassengerType(passengerType);
+        updatePassengerCountInMap(station, passengerType);
+        processExpenditure(indexInList, station);
+    }
+
+    private void updatePassengerCountInMap(Station station, PassengerType passengerType) {
+        if(station.equals(AIRPORT) ){
             airport.updatePassengerTotalCount(passengerType, airport.getPassengerTotalCount(passengerType) + 1);
         }
 
         if(station.equals(CENTRAL)){
             central.updatePassengerTotalCount(passengerType, central.getPassengerTotalCount(passengerType) + 1);
         }
-        processExpenditure(indexInList, station);
     }
 
     private void processExpenditure(int index, Station station) {
-        MetroCard ms = mcs.get(index);
+        MetroCard ms = metroCardList.get(index);
         int count = ms.getTravelCount();
         int serviceFee = 0;
         PassengerType passengerType = ms.getPassengerType();
@@ -46,9 +50,9 @@ public class MetroCardServiceImpl {
         int discount = passengerType.getTravelCharge() - costToTravel ;
         if(costToTravel > ms.getBalance()){
             serviceFee = (int)(SERVICE_FEE_CHARGE_PERCENT*(costToTravel - ms.getBalance()));
-            mcs.get(index).setBalance(costToTravel);
+            metroCardList.get(index).setBalance(costToTravel);
         }
-        mcs.get(index).setBalance(mcs.get(index).getBalance() - costToTravel);
+        metroCardList.get(index).setBalance(metroCardList.get(index).getBalance() - costToTravel);
         costToTravel += serviceFee;
         updateSummaryAtStation(costToTravel, discount, station);
     }
@@ -64,7 +68,7 @@ public class MetroCardServiceImpl {
         }
     }
 
-    public void printSummary() {
+    public void getSummary() {
         ReadWriteServiceImpl obj = new ReadWriteServiceImpl();
         obj.writeSummary(central, CENTRAL);
         obj.writeSummary(airport, AIRPORT);

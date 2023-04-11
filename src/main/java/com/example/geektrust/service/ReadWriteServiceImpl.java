@@ -28,13 +28,13 @@ public class ReadWriteServiceImpl {
             Station station = Station.valueOf(sc.next());
             service.processData(key, passengerType, station);
         }else{
-            service.printSummary();
+            service.getSummary();
         }
     }
 
-    public void writeSummary(StationSummary station, Station central) {
+    public void writeSummary(StationSummary station, Station stationName) {
 
-        System.out.println("TOTAL_COLLECTION"+"    "+ central + "     " + station.getTotalCollection() + "       " + station.getTotalDiscount());
+        System.out.println("TOTAL_COLLECTION"+"    "+ stationName + "     " + station.getTotalCollection() + "       " + station.getTotalDiscount());
         System.out.println("PASSENGER_TYPE_SUMMARY");
         for (Map.Entry<PassengerType,Integer> mapElement : station.getPassengerTypeSummary().entrySet()){
             if(mapElement.getValue() != 0){
