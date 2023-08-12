@@ -11,7 +11,7 @@ public class MetroCardRepository {
 
     private Map<String, MetroCard> metroCards = new HashMap<>();
 
-    private void addMetroCard(String id, MetroCard metroCard){
+    public void addMetroCard(String id, MetroCard metroCard){
         metroCards.put(id, metroCard);
     }
 
