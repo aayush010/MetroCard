@@ -4,13 +4,12 @@ import com.example.geektrust.Models.MetroCard;
 import com.example.geektrust.PassengerType.PassengerType;
 import com.example.geektrust.Repository.MetroCardRepository;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class BalanceServiceTest {
 
-    @Mock
+ //   @Mock
     MetroCardRepository metroCardRepository = new MetroCardRepository();
 
     BalanceService balanceService = new BalanceService(metroCardRepository);
