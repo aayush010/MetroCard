@@ -7,7 +7,7 @@ public class Constants {
     public static final String REGEX2 = "MC.";
     public static final String BALANCE_CONSTANT = "BALANCE";
     public static final String CHECK_IN_CONSTANT = "CHECK_IN";
-    public enum Station {
-        CENTRAL, AIRPORT;
-    }
+    public static final String CENTRAL = "CENTRAL";
+    public static final String AIRPORT = "AIRPORT";
+
 }

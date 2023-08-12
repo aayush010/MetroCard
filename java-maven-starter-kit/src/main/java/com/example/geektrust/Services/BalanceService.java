@@ -4,11 +4,12 @@ import com.example.geektrust.Models.MetroCard;
 import com.example.geektrust.PassengerType.PassengerType;
 import com.example.geektrust.Repository.MetroCardRepository;
 
+import static com.example.geektrust.Constants.Constants.DISCOUNT;
 import static com.example.geektrust.Constants.Constants.SERVICE_FEE_CHARGE_PERCENT;
 
 public class BalanceService {
 
-    MetroCardRepository repository;
+    private MetroCardRepository repository;
     BalanceService(){
         repository = new MetroCardRepository();
     }
@@ -30,11 +31,11 @@ public class BalanceService {
     }
 
     public int costOfTrip(String key, PassengerType passengerType) {
-        int cost = discountAvailable(key) ? passengerType.getTravelCharge()/2 : passengerType.getTravelCharge();
+        int cost = discountAvailable(key) ? (int)(DISCOUNT*passengerType.getTravelCharge()) : passengerType.getTravelCharge();
         int balance = repository.getMetroCardById(key).getBalance();
         if(balance < cost){
             int serviceFee = (int)(SERVICE_FEE_CHARGE_PERCENT*(cost - balance));
-            repository.updateBalanceOfMetroCard(key, cost);
+            repository.updateBalanceOfMetroCard(key, 0);
             cost += serviceFee;
         }else{
             repository.updateBalanceOfMetroCard(key, balance - cost);

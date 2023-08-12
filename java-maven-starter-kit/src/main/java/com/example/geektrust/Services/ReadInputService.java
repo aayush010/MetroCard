@@ -1,6 +1,4 @@
 package com.example.geektrust.Services;
-
-import com.example.geektrust.Models.MetroCard;
 import com.example.geektrust.PassengerType.PassengerType;
 
 import java.util.Scanner;

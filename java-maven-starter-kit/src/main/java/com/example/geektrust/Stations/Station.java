@@ -27,9 +27,4 @@ public abstract class Station {
         int value = passengerTypeSummary.get(passengerType) + 1;
         passengerTypeSummary.replace(passengerType, value);
     }
-
-    public int getPassengerTotalCount(PassengerType passengerType){
-
-        return passengerTypeSummary.get(passengerType);
-    }
 }

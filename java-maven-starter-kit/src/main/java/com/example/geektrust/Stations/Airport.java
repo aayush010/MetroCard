@@ -1,10 +1,11 @@
 package com.example.geektrust.Stations;
 
+import com.example.geektrust.Constants.Constants;
 import lombok.Getter;
 
 
 public class Airport extends Station {
-    String id = "AIRPORT";
+    private String id = Constants.AIRPORT;
 
     @Override
     public String getId() {

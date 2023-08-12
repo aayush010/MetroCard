@@ -24,7 +24,7 @@ public class MetroServiceImpl {
     }
 
     public void printSummary() {
-        printSummaryService.printSummary(checkInService.central);
-        printSummaryService.printSummary(checkInService.airport);
+        printSummaryService.printSummary(checkInService.getCentral());
+        printSummaryService.printSummary(checkInService.getAirport());
     }
 }

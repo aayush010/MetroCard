@@ -4,13 +4,15 @@ import com.example.geektrust.PassengerType.PassengerType;
 import com.example.geektrust.Stations.Airport;
 import com.example.geektrust.Stations.Central;
 import com.example.geektrust.Stations.Station;
+import lombok.Getter;
 
+@Getter
 public class CheckInService {
 
 
-    Station airport ;
-    Station central ;
-    StationService stationService;
+    private Station airport ;
+    private Station central ;
+    private StationService stationService;
     CheckInService(){
         airport = new Airport();
         central = new Central();
