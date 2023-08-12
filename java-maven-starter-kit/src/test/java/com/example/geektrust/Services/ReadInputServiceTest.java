@@ -1,7 +1,5 @@
 package com.example.geektrust.Services;
 
-import com.example.geektrust.Models.MetroCard;
-import com.example.geektrust.PassengerType.PassengerType;
 import org.junit.jupiter.api.Test;
 
 import java.util.Scanner;
@@ -19,7 +17,7 @@ class ReadInputServiceTest {
         Scanner scanner = new Scanner("BALANCE MC3 1000");
         readInputService.processInput(scanner);
 
-        assertEquals(1000, metroService.balanceService.getRepository().getMetroCardById("MC3").getBalance());
+        assertEquals(1000, metroService.transactionService.getRepository().getMetroCardById("MC3").getBalance());
     }
 
     @Test
@@ -31,7 +29,7 @@ class ReadInputServiceTest {
         Scanner scanner3 = new Scanner("CHECK_IN MC3 ADULT AIRPORT");
         readInputService.processInput(scanner3);
 
-        assertEquals(2, metroService.balanceService.getRepository().getTravelCount("MC3"));
+        assertEquals(2, metroService.transactionService.getRepository().getTravelCount("MC3"));
         //assertEquals(200, metroService.checkInService.getAirport().getTotalCollection() + metroService.checkInService.getCentral().getTotalCollection());
     }
 }

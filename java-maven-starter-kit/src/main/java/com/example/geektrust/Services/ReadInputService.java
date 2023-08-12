@@ -10,10 +10,10 @@ import static com.example.geektrust.Constants.Constants.*;
 
 public class ReadInputService {
 
-    MetroServiceImpl service;
+    private MetroServiceImpl service;
 
     //This Constructor is for unit Testing
-    ReadInputService(MetroServiceImpl metroService) {
+    public ReadInputService(MetroServiceImpl metroService) {
         service = metroService;
     }
     public ReadInputService(){
@@ -25,7 +25,7 @@ public class ReadInputService {
         if(input.equals(BALANCE_CONSTANT)){
             String id = sc.next();
             int balance = sc.nextInt();
-            service.insertCard(id, balance);
+            service.addCard(id, balance);
 
         }else if(input.equals(CHECK_IN_CONSTANT)){
             String key = sc.next(Pattern.compile(REGEX2));
@@ -33,8 +33,8 @@ public class ReadInputService {
             String stationName = sc.next();
             service.checkIn(key, passengerType, stationName);
         }else{
-            printSummary(service.checkInService.getCentral());
-            printSummary(service.checkInService.getAirport());
+            printSummary(service.getCentral());
+            printSummary(service.getAirport());
         }
     }
 

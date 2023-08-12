@@ -9,14 +9,14 @@ import static com.example.geektrust.Constants.Constants.DISCOUNT;
 import static com.example.geektrust.Constants.Constants.SERVICE_FEE_CHARGE_PERCENT;
 
 @Getter
-public class BalanceService {
+public class TransactionService {
 
     private MetroCardRepository repository;
-    BalanceService(){
+    public TransactionService(){
         repository = new MetroCardRepository();
     }
 
-    public BalanceService(MetroCardRepository metroCardRepository) {
+    public TransactionService(MetroCardRepository metroCardRepository) {
         repository = metroCardRepository;
     }
 
