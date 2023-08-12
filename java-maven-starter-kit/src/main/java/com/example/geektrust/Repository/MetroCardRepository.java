@@ -9,9 +9,9 @@ import java.util.Map;
 
 public class MetroCardRepository {
 
-    public Map<String, MetroCard> metroCards = new HashMap<>();
+    private Map<String, MetroCard> metroCards = new HashMap<>();
 
-    public void addMetroCard(String id, MetroCard metroCard){
+    private void addMetroCard(String id, MetroCard metroCard){
         metroCards.put(id, metroCard);
     }
 
