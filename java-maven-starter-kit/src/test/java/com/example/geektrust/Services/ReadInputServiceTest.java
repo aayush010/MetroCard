@@ -3,7 +3,6 @@ package com.example.geektrust.Services;
 import com.example.geektrust.Models.MetroCard;
 import com.example.geektrust.PassengerType.PassengerType;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
@@ -11,7 +10,6 @@ import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@RunWith(MockitoJUnitRunner.class)
 class ReadInputServiceTest {
 
     @Mock
