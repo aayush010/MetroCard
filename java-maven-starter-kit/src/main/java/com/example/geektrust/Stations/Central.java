@@ -2,7 +2,7 @@ package com.example.geektrust.Stations;
 
 import com.example.geektrust.Constants.Constants;
 import lombok.Getter;
-
+@Getter
 public class Central extends Station{
     private String id = Constants.CENTRAL;
 

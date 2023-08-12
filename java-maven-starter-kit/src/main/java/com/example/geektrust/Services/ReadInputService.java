@@ -8,7 +8,15 @@ import static com.example.geektrust.Constants.Constants.*;
 
 public class ReadInputService {
 
-    MetroServiceImpl service = new MetroServiceImpl();
+    MetroServiceImpl service;
+
+    //This Constructor is for unit Testing
+    ReadInputService(MetroServiceImpl metroService) {
+        service = metroService;
+    }
+    public ReadInputService(){
+        service = new MetroServiceImpl();
+    }
 
     public void processInput(Scanner sc) {
         String input = sc.next(Pattern.compile(REGEX1));

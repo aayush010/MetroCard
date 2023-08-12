@@ -1,10 +1,9 @@
 package com.example.geektrust.Services;
 
 import com.example.geektrust.PassengerType.PassengerType;
-import com.example.geektrust.Repository.MetroCardRepository;
-import com.example.geektrust.Stations.Airport;
-import com.example.geektrust.Stations.Central;
+import lombok.Getter;
 
+@Getter
 public class MetroServiceImpl {
     BalanceService balanceService ;
     CheckInService checkInService ;

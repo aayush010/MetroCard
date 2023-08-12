@@ -3,15 +3,21 @@ package com.example.geektrust.Services;
 import com.example.geektrust.Models.MetroCard;
 import com.example.geektrust.PassengerType.PassengerType;
 import com.example.geektrust.Repository.MetroCardRepository;
+import lombok.Getter;
 
 import static com.example.geektrust.Constants.Constants.DISCOUNT;
 import static com.example.geektrust.Constants.Constants.SERVICE_FEE_CHARGE_PERCENT;
 
+@Getter
 public class BalanceService {
 
     private MetroCardRepository repository;
     BalanceService(){
         repository = new MetroCardRepository();
+    }
+
+    public BalanceService(MetroCardRepository metroCardRepository) {
+        repository = metroCardRepository;
     }
 
 
