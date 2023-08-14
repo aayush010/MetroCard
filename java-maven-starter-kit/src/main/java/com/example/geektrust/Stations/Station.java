@@ -13,7 +13,7 @@ public abstract class Station {
     private Integer totalCollection;
     private Integer totalDiscount;
 
-    public Station() {
+    public Station(){
         this.passengerTypeSummary.put(PassengerType.ADULT,0);
         this.passengerTypeSummary.put(PassengerType.KID,0);
         this.passengerTypeSummary.put(PassengerType.SENIOR_CITIZEN,0);

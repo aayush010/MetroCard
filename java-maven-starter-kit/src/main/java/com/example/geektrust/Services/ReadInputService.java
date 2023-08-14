@@ -1,4 +1,5 @@
 package com.example.geektrust.Services;
+import com.example.geektrust.Constants.Constants;
 import com.example.geektrust.PassengerType.PassengerType;
 import com.example.geektrust.Stations.Station;
 
@@ -31,20 +32,18 @@ public class ReadInputService {
             String key = sc.next(Pattern.compile(REGEX2));
             PassengerType passengerType = PassengerType.valueOf(sc.next(Pattern.compile(REGEX1)));
             String stationName = sc.next();
-            service.checkIn(key, passengerType, stationName);
+            checkIn(key, passengerType, stationName);
+
         }else{
-            printSummary(service.getCentral());
-            printSummary(service.getAirport());
+            service.printSummary(service.getCentral());
+            service.printSummary(service.getAirport());
         }
     }
 
-    public void printSummary(Station station) {
-        System.out.println("TOTAL_COLLECTION"+"    "+ station.getId() + "     " + station.getTotalCollection() + "       " + station.getTotalDiscount());
-        System.out.println("PASSENGER_TYPE_SUMMARY");
-        for (Map.Entry<PassengerType,Integer> mapElement : station.getPassengerTypeSummary().entrySet()){
-            if(mapElement.getValue() != 0){
-                System.out.println(mapElement.getKey() + "   " + mapElement.getValue());
-            }
-        }
+    private void checkIn(String key, PassengerType passengerType, String stationName) {
+        if(stationName.equals(AIRPORT))
+            service.checkIn(key, passengerType, service.getAirport());
+        if(stationName.equals(CENTRAL))
+            service.checkIn(key, passengerType, service.getCentral());
     }
 }

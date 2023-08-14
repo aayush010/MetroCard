@@ -1,6 +1,6 @@
 package com.example.geektrust.Constants;
 
-public class Constants {
+public final class Constants {
     public static final double DISCOUNT = 0.5 ;
     public static final double SERVICE_FEE_CHARGE_PERCENT = 0.02;
     public static final String REGEX1 = "[A-Z_]*";
