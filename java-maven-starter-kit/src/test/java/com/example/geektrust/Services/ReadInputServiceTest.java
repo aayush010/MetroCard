@@ -1,5 +1,8 @@
 package com.example.geektrust.Services;
 
+import com.example.geektrust.Stations.Airport;
+import com.example.geektrust.Stations.Central;
+import com.example.geektrust.Stations.Station;
 import org.junit.jupiter.api.Test;
 
 import java.util.Scanner;
@@ -10,7 +13,9 @@ class ReadInputServiceTest {
 
    // @Mock
     MetroServiceImpl metroService = new MetroServiceImpl();
-    ReadInputService readInputService = new ReadInputService(metroService);
+    Station airport = new Airport();
+    Station central = new Central();
+    ReadInputService readInputService = new ReadInputService(metroService,airport,central);
 
     @Test
     void processInputForBalance() {

@@ -1,9 +1,9 @@
 package com.example.geektrust.Services;
-import com.example.geektrust.Constants.Constants;
 import com.example.geektrust.PassengerType.PassengerType;
+import com.example.geektrust.Stations.Airport;
+import com.example.geektrust.Stations.Central;
 import com.example.geektrust.Stations.Station;
 
-import java.util.Map;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -12,13 +12,19 @@ import static com.example.geektrust.Constants.Constants.*;
 public class ReadInputService {
 
     private MetroServiceImpl service;
+    private Station airport ;
+    private Station central ;
 
     //This Constructor is for unit Testing
-    public ReadInputService(MetroServiceImpl metroService) {
+    public ReadInputService(MetroServiceImpl metroService, Station airport, Station central) {
         service = metroService;
+        this.airport = airport;
+        this.central = central;
     }
     public ReadInputService(){
         service = new MetroServiceImpl();
+        airport = new Airport();
+        central = new Central();
     }
 
     public void processInput(Scanner sc) {
@@ -35,15 +41,15 @@ public class ReadInputService {
             checkIn(key, passengerType, stationName);
 
         }else{
-            service.printSummary(service.getCentral());
-            service.printSummary(service.getAirport());
+            service.printSummary(airport);
+            service.printSummary(central);
         }
     }
 
     private void checkIn(String key, PassengerType passengerType, String stationName) {
         if(stationName.equals(AIRPORT))
-            service.checkIn(key, passengerType, service.getAirport());
+            service.checkIn(key, passengerType, airport);
         if(stationName.equals(CENTRAL))
-            service.checkIn(key, passengerType, service.getCentral());
+            service.checkIn(key, passengerType, central);
     }
 }

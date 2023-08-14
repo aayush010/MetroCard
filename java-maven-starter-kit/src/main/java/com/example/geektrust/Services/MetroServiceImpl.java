@@ -10,15 +10,10 @@ import java.util.Map;
 
 import static com.example.geektrust.Constants.Constants.DISCOUNT;
 
-@Getter
 public class MetroServiceImpl {
     public TransactionService transactionService;
-    private Station airport ;
-    private Station central ;
     public MetroServiceImpl(){
         transactionService = new TransactionService();
-        airport = new Airport();
-        central = new Central();
     }
 
     public void addCard(String id, int balance) {
